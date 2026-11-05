@@ -81,3 +81,4 @@ docker compose -f docker/docker-compose.yml --profile test up tests
 |-------|--------|---------|
 | `/` | GET | `{"message":"DevOps Lab 1 CI/CD pipeline is working","version":"1.0.0"}` |
 | `/health` | GET | `{"status":"UP","version":"1.0.0"}` — HTTP 200 |
+
