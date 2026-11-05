@@ -1,0 +1,48 @@
+# ─── .dockerignore ────────────────────────────────────────────────────────────
+# Files/dirs excluded from the Docker build context.
+# Keep this file at the project root so Docker respects it.
+
+# Git
+.git
+.gitignore
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# pytest / test artifacts
+.pytest_cache/
+test-results/
+*.xml
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.tar.gz
+
+# IDE and OS files
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Documentation and reports (not needed in image)
+docs/
+reports/
+*.pdf
+*.zip
+
+# Secrets / credentials
+.env
+*.env
+secrets/

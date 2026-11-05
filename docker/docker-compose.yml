@@ -1,0 +1,50 @@
+version: "3.9"
+
+# ─── Services ─────────────────────────────────────────────────────────────────
+services:
+
+  # ── Flask application ───────────────────────────────────────────────────────
+  app:
+    build:
+      context: ..                        # project root (so COPY app/ works)
+      dockerfile: docker/Dockerfile
+    image: devops-lab1:latest
+    container_name: devops-lab1-app
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: production
+      FLASK_APP: app.py
+    networks:
+      - devops-net
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.devops.student=Kartik"
+      - "com.devops.roll=2301730205"
+      - "com.devops.lab=devops-lab-1"
+
+  # ── Test runner (runs pytest then exits) ────────────────────────────────────
+  tests:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.test
+    image: devops-lab1-test:latest
+    container_name: devops-lab1-tests
+    volumes:
+      - ../test-results:/app/test-results
+    networks:
+      - devops-net
+    profiles:
+      - test                             # only runs with: docker compose --profile test up
+
+# ─── Networks ─────────────────────────────────────────────────────────────────
+networks:
+  devops-net:
+    driver: bridge
