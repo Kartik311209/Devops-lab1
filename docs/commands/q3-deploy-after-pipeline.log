@@ -1,0 +1,12 @@
+$ systemctl status devops-lab1 --no-pager
+● devops-lab1.service - DevOps Lab 1 Flask Application
+     Loaded: loaded (/etc/systemd/system/devops-lab1.service; disabled; preset: enabled)
+     Active: active (running) since Tue 2026-11-03 18:28:15 UTC; 12s ago
+   Main PID: 2184 (python)
+      Tasks: 1 (limit: 9172)
+     Memory: 18.2M (peak: 19.1M)
+        CPU: 280ms
+     CGroup: /system.slice/devops-lab1.service
+
+$ curl http://localhost:5000/health
+{"status":"UP","version":"1.0.1"}
